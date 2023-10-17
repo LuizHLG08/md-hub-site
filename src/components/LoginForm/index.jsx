@@ -3,20 +3,19 @@ import { Input } from "../formComponents/Input"
 import styles from "./style.module.scss"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { api } from "../../services/api"
 import { loginFormSchema } from "./loginFormSchema"
-import { useState } from "react"
-import { toast } from "react-toastify"
+import { useContext, useState } from "react"
+import { UserContext } from "../../provider/userContext"
 
-export const LoginForm = ({setUser}) => {
+export const LoginForm = () => {
+
+    const { userLogin, loading } = useContext(UserContext)
 
     const {register, handleSubmit, formState: {errors}} = useForm({
         resolver: zodResolver(loginFormSchema)
     })
     
     const [isFormValid, setIsFormValid] = useState(false)
-    const [loading, setLoading] = useState(false)
-    const navigate = useNavigate()
 
     const handleInputChange = () => {
         const emailValue = document.querySelector('input[name="email"]').value;
@@ -25,23 +24,7 @@ export const LoginForm = ({setUser}) => {
     }
 
     const submit = async (formData) => {
-        try {
-            setLoading(true)
-            const { data } = await api.post("/sessions", formData)
-            localStorage.setItem("@loginToken", data.token)
-            localStorage.setItem("@userData", JSON.stringify(data.user))
-            setUser(data.user)
-            toast.success("Login realizado com sucesso!")
-            setTimeout(() => navigate("/dashboard"), 1000);
-        } catch (error) {
-            if(error.response.data.message === "Incorrect email / password combination") {
-                toast.error("Email ou senha incorretos!")
-            } else {
-                toast.error("Ops! Algo deu errado")
-            }
-        } finally {
-            setLoading(false)
-        }
+        userLogin(formData)
     }
  
     return (
