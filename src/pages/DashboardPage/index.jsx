@@ -1,12 +1,16 @@
 import styles from "./style.module.scss"
 import logo from "../../assets/kenzie-hub-logo.svg"
-import { useContext } from "react"
-import { UserContext } from "../../provider/userContext"
+import plus from "../../assets/plus.svg"
+import { useContext, useState } from "react"
+import { UserContext } from "../../provider/UserContext"
+import { TechList } from "../../components/TechList"
+import { CreateTechModal } from "../../components/CreateTechModal"
 
 
 export const DashboardPage = () => {
     
     const { user, logOut } = useContext(UserContext)
+    const [isCreateOpen, setIsCreateOpen] = useState(false)
     
     return (
         <>
@@ -24,11 +28,13 @@ export const DashboardPage = () => {
                     </div>
                 </section>
                 <section className={styles.contentSection}>
-                    <div>
-                        <h2 className="title1">Que pena! Estamos em desenvolvimento :(</h2>
-                        <p className="text1">Nossa aplicação está em desenvolvimento, em breve teremos novidades</p>
+                    <div className={styles.addTechContainer}>
+                        <h2 className="title1">Tecnologias</h2>
+                        <button className="backButton" onClick={() => setIsCreateOpen(true)} ><img src={plus} alt="" /></button>
                     </div>
+                    <TechList />
                 </section>
+                {isCreateOpen ? <CreateTechModal setIsCreateOpen={setIsCreateOpen}/> : null}
             </main>
         </>
     )

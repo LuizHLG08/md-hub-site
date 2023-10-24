@@ -44,14 +44,23 @@
     .contentSection {
         width: 100%;
         display: flex;
-        justify-content: center;
-        div {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+
+        .addTechContainer {
             margin-top: 2rem;
             width: 90%;
             max-width: 48rem;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
             gap: 1.5rem;
+
+            button {
+                height: 2rem;
+                width: 2rem;
+            }
         }
     }
 }

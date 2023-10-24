@@ -1,0 +1,21 @@
+.selectContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+
+    select {
+        height: 3rem;
+        padding: 0 1rem;
+        border-radius: 4px;
+        background-color: var(--color-grey-2);
+        color: var(--color-grey-1);
+        font-size: 1rem;
+        cursor: pointer;
+        border: 1px solid transparent;
+        &:focus{
+            color: var(--color-grey-0);
+            border: 1px solid var(--fixed-white);
+        }
+    }
+}

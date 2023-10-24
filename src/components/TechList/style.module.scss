@@ -1,0 +1,11 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-grey-3);
+    min-height: 17.125rem;
+    width: 90%;
+    max-width: 48rem;
+    border-radius: 4px;
+    gap: 1rem;
+    padding: 2rem;
+}
