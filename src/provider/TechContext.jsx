@@ -8,6 +8,7 @@ export const TechContext = createContext({})
 export const TechProvider = ({ children }) => {
 
     const [techList, setTechList] = useState([])
+    const [isCreateOpen, setIsCreateOpen] = useState(false)
 
     useEffect(() => {
         const getTechs = async () => {
@@ -25,9 +26,25 @@ export const TechProvider = ({ children }) => {
         }
         getTechs()
     }, [])
+    
+    const createTech = async (formData) => {
+        try {
+            const token = localStorage.getItem("@loginToken")
+            const { data } = await api.post("/users/techs",formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+            setTechList([...techList, data])
+            toast.success("Technologia criada com sucesso!")
+            setIsCreateOpen(false)
+        } catch (error) {
+            toast.error("Ops! Algo deu errado")
+        }
+    }
 
     return (
-        <TechContext.Provider value={{techList}}>
+        <TechContext.Provider value={{techList, createTech, isCreateOpen, setIsCreateOpen}}>
             {children}
         </TechContext.Provider>
     )

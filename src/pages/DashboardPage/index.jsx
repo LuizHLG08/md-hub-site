@@ -5,12 +5,14 @@ import { useContext, useState } from "react"
 import { UserContext } from "../../provider/UserContext"
 import { TechList } from "../../components/TechList"
 import { CreateTechModal } from "../../components/CreateTechModal"
+import { TechContext } from "../../provider/TechContext"
 
 
 export const DashboardPage = () => {
     
     const { user, logOut } = useContext(UserContext)
-    const [isCreateOpen, setIsCreateOpen] = useState(false)
+    const { isCreateOpen, setIsCreateOpen } = useContext(TechContext)
+    
     
     return (
         <>
@@ -34,7 +36,7 @@ export const DashboardPage = () => {
                     </div>
                     <TechList />
                 </section>
-                {isCreateOpen ? <CreateTechModal setIsCreateOpen={setIsCreateOpen}/> : null}
+                {isCreateOpen ? <CreateTechModal /> : null}
             </main>
         </>
     )
