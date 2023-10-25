@@ -55,9 +55,18 @@ export const TechProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`
                 }
             })
-            console.log(data)
+            const newTechList = techList.map(tech => {
+                if(tech.id === editingTech.id) {
+                    return data 
+                } else {
+                    return tech
+                }
+            })
+            setTechList(newTechList)
+            setEditingTech(null)
+            toast.success("Tecnologia editada com sucesso!")
         } catch (error) {
-            console.log(error)
+            toast.error("Ops! Algo deu errado")
         }
 
     }
