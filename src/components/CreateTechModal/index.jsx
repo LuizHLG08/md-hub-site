@@ -33,7 +33,7 @@ export const CreateTechModal = () => {
                     <button onClick={() => setIsCreateOpen(false)}>X</button>
                 </div>
                 <form className={styles.createTechForm} onSubmit={handleSubmit(submit)}>
-                    <Input label="Nome" type="text" placeholder="Digite uma tecnologia..." {...register("title")} error={errors.name} />
+                    <Input label="Nome" type="text" placeholder="Digite uma tecnologia..." {...register("title")} error={errors.title} />
                     <Select label="Selecionar status" name="status" onChange={handleSelectChange} {...register("status")} error={errors.status} options={[
                         {value: "Iniciante", label: "Iniciante"},
                         {value: "Intermediário", label: "Intermediário"},
