@@ -7,12 +7,13 @@ import { TechList } from "../../components/TechList"
 import { CreateTechModal } from "../../components/CreateTechModal"
 import { TechContext } from "../../provider/TechContext"
 import { EditTechModal } from "../../components/EditTechModal"
+import { DeleteTechModal } from "../../components/DeleteTechModal"
 
 
 export const DashboardPage = () => {
     
     const { user, logOut } = useContext(UserContext)
-    const { isCreateOpen, setIsCreateOpen, editingTech } = useContext(TechContext)
+    const { isCreateOpen, setIsCreateOpen, editingTech, deletingTech } = useContext(TechContext)
     
     
     return (
@@ -39,6 +40,7 @@ export const DashboardPage = () => {
                 </section>
                 {isCreateOpen ? <CreateTechModal /> : null}
                 {editingTech ? <EditTechModal /> : null}
+                {deletingTech ? <DeleteTechModal /> : null}
             </main>
         </>
     )

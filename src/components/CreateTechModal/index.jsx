@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { createTechSchema } from "./createTechSchema"
 import styles from "./style.module.scss"
 import { TechContext } from "../../provider/TechContext"
+import { AiOutlineClose } from "react-icons/ai"
 
 export const CreateTechModal = () => {
     const { createTech, setIsCreateOpen } = useContext(TechContext)
@@ -30,7 +31,7 @@ export const CreateTechModal = () => {
             <div className={styles.modalContainer}>
                 <div className={styles.modalHeader}>
                     <h2>Cadastrar Tecnologia</h2>
-                    <button onClick={() => setIsCreateOpen(false)}>X</button>
+                    <button className="closeModalButton" onClick={() => setIsCreateOpen(false)}><AiOutlineClose className="icon" /></button>
                 </div>
                 <form className={styles.createTechForm} onSubmit={handleSubmit(submit)}>
                     <Input label="Nome" type="text" placeholder="Digite uma tecnologia..." {...register("title")} error={errors.title} />

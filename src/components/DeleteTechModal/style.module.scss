@@ -1,0 +1,17 @@
+.deleteModal {
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1rem;
+    gap: 5rem;
+
+    .close {
+        align-self: flex-end;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 1.25rem;
+    }
+
+
+}

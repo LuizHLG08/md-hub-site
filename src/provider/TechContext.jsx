@@ -10,6 +10,7 @@ export const TechProvider = ({ children }) => {
     const [techList, setTechList] = useState([])
     const [isCreateOpen, setIsCreateOpen] = useState(false)
     const [editingTech, setEditingTech] = useState(null)
+    const [deletingTech, setDeletingTech] = useState(null)
 
     useEffect(() => {
         const getTechs = async () => {
@@ -71,8 +72,26 @@ export const TechProvider = ({ children }) => {
 
     }
 
+    const deleteTech = async () => {
+        try {
+            const token = localStorage.getItem("@loginToken")
+            await api.delete(`/users/techs/${deletingTech}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            toast.success("Tecnologia removida com sucesso!")
+            const newTechList = techList.filter(tech => tech.id !== deletingTech)
+            setTechList(newTechList)
+            setDeletingTech(null)
+        } catch (error) {
+            toast.error("Não foi possível remover a tecnologia!")
+        }
+    }
+
     return (
-        <TechContext.Provider value={{ techList, createTech, isCreateOpen, setIsCreateOpen, editingTech, setEditingTech, editTech }}>
+        <TechContext.Provider value={{ techList, createTech, isCreateOpen, setIsCreateOpen, editingTech, setEditingTech, editTech, deletingTech, setDeletingTech, deleteTech }}>
             {children}
         </TechContext.Provider>
     )

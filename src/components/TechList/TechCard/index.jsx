@@ -6,7 +6,7 @@ import { TechContext } from "../../../provider/TechContext"
 
 export const TechCard = ({tech}) => {
 
-    const { setEditingTech } = useContext(TechContext)
+    const { setEditingTech, setDeletingTech } = useContext(TechContext)
 
     return (
         <li className={styles.techCard}>
@@ -16,7 +16,7 @@ export const TechCard = ({tech}) => {
                 <button onClick={() => setEditingTech(tech)}>
                     <HiOutlinePencil className={styles.buttonIcon} />
                 </button>
-                <button>
+                <button onClick={() => setDeletingTech(tech.id)}>
                     <BsTrash className={styles.buttonIcon} />
                 </button>
             </div>

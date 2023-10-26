@@ -6,6 +6,7 @@ import { Input } from "../formComponents/Input"
 import { Select } from "../formComponents/Select"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { editTechSchema } from "./editTechSchema"
+import { AiOutlineClose } from "react-icons/ai"
 
 export const EditTechModal = () => {
 
@@ -16,7 +17,7 @@ export const EditTechModal = () => {
         setSelectedOption(selectedValue);
     }
 
-    const { register, handleSubmit, formState: { isDirty, errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(editTechSchema),
         values: {
             title: editingTech.title,
@@ -30,11 +31,11 @@ export const EditTechModal = () => {
     }
 
     return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.modalContainer}>
-                <div className={styles.modalHeader}>
+        <div className="modalOverlay">
+            <div className="modalContainer">
+                <div className="modalHeader">
                     <h2>Tecnologia Detalhes</h2>
-                    <button onClick={() => setEditingTech(null)}>X</button>
+                    <button className="closeModalButton" onClick={() => setEditingTech(null)}><AiOutlineClose className="icon" /></button>
                 </div>
                 <form className={styles.editTechForm} onSubmit={handleSubmit(submit)}>
                     <Input label="Nome" type="text" placeholder="Digite uma tecnologia..." {...register("title")} error={errors.title} disabled />
@@ -43,7 +44,7 @@ export const EditTechModal = () => {
                         {value: "Intermediário", label: "Intermediário"},
                         {value: "Avançado", label: "Avançado"},
                     ]} />
-                    <button className={`submitButton formButton text2 ${isDirty ? 'submitButtonActive' : null}`} type="submit">Salvar alterações</button>
+                    <button className={`submitButton formButton text2 submitButtonActive`} type="submit">Salvar alterações</button>
                 </form>
             </div>
         </div>
