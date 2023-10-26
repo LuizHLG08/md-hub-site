@@ -7,6 +7,8 @@ import { Select } from "../formComponents/Select"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { editTechSchema } from "./editTechSchema"
 import { AiOutlineClose } from "react-icons/ai"
+import { useOutClick } from "../hooks/useOutClick"
+import { useKeyDown } from "../hooks/useKeydown"
 
 export const EditTechModal = () => {
 
@@ -30,12 +32,15 @@ export const EditTechModal = () => {
         editTech(formData)
     }
 
+    const modalRef = useOutClick(() => setEditingTech(null))
+    const buttonRef = useKeyDown("Escape", (element) => element.click())
+
     return (
         <div className="modalOverlay">
-            <div className="modalContainer">
+            <div className="modalContainer" ref={modalRef}>
                 <div className="modalHeader">
                     <h2>Tecnologia Detalhes</h2>
-                    <button className="closeModalButton" onClick={() => setEditingTech(null)}><AiOutlineClose className="icon" /></button>
+                    <button className="closeModalButton" onClick={() => setEditingTech(null)} ref={buttonRef}><AiOutlineClose className="icon" /></button>
                 </div>
                 <form className={styles.editTechForm} onSubmit={handleSubmit(submit)}>
                     <Input label="Nome" type="text" placeholder="Digite uma tecnologia..." {...register("title")} error={errors.title} disabled />

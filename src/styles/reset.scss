@@ -50,6 +50,9 @@ table {
 }
 button {
     cursor: pointer;
+	&:focus {
+		outline: none;
+	}
 }
 input:focus {
 	outline: none;

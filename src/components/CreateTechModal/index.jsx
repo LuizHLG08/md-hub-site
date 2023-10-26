@@ -7,6 +7,8 @@ import { createTechSchema } from "./createTechSchema"
 import styles from "./style.module.scss"
 import { TechContext } from "../../provider/TechContext"
 import { AiOutlineClose } from "react-icons/ai"
+import { useOutClick } from "../hooks/useOutClick"
+import { useKeyDown } from "../hooks/useKeydown"
 
 export const CreateTechModal = () => {
     const { createTech, setIsCreateOpen } = useContext(TechContext)
@@ -25,13 +27,16 @@ export const CreateTechModal = () => {
         createTech(formData)
     }
 
+    const modalRef = useOutClick(() => setIsCreateOpen(false))
+    const buttonRef = useKeyDown("Escape", (element) => element.click())
+
 
     return (
         <div className={styles.modalOverlay}>
-            <div className={styles.modalContainer}>
+            <div className={styles.modalContainer} ref={modalRef}>
                 <div className={styles.modalHeader}>
                     <h2>Cadastrar Tecnologia</h2>
-                    <button className="closeModalButton" onClick={() => setIsCreateOpen(false)}><AiOutlineClose className="icon" /></button>
+                    <button className="closeModalButton" onClick={() => setIsCreateOpen(false)} ref={buttonRef}><AiOutlineClose className="icon" /></button>
                 </div>
                 <form className={styles.createTechForm} onSubmit={handleSubmit(submit)}>
                     <Input label="Nome" type="text" placeholder="Digite uma tecnologia..." {...register("title")} error={errors.title} />
