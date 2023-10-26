@@ -11,14 +11,16 @@ export const TechCard = ({tech}) => {
     return (
         <li className={styles.techCard}>
             <h2 className="title1">{tech.title}</h2>
-            <div>
+            <div className={styles.techInfo}>
                 <p className="text4">{tech.status}</p>
-                <button onClick={() => setEditingTech(tech)}>
-                    <HiOutlinePencil className={styles.buttonIcon} />
-                </button>
-                <button onClick={() => setDeletingTech(tech.id)}>
-                    <BsTrash className={styles.buttonIcon} />
-                </button>
+                <div className={styles.buttonsContainer}>
+                    <button onClick={() => setEditingTech(tech)}>
+                        <HiOutlinePencil className={styles.buttonIcon} />
+                    </button>
+                    <button onClick={() => setDeletingTech(tech.id)}>
+                        <BsTrash className={styles.buttonIcon} />
+                    </button>
+                </div>
             </div>
         </li>
     )
