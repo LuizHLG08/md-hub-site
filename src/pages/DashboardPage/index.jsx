@@ -1,5 +1,4 @@
 import styles from "./style.module.scss"
-import logo from "../../assets/kenzie-hub-logo.svg"
 import plus from "../../assets/plus.svg"
 import { useContext, useState } from "react"
 import { UserContext } from "../../provider/UserContext"
@@ -20,7 +19,7 @@ export const DashboardPage = () => {
         <>
             <header className={styles.header}>
                 <div className={styles.headerContainer}>
-                    <img src={logo} alt="kenzie hub logo" />
+                    <h2>MD Hub</h2>
                     <button className={`backButton text3 ${styles.logoutButton}`} onClick={logOut}>Sair</button>
                 </div>
             </header>

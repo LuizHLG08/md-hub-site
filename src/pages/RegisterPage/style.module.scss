@@ -5,4 +5,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .title {
+        font-weight: bolder;
+        color: var(--color-brand-1);
+        font-size: 1.3rem;
+    }
+
 }
